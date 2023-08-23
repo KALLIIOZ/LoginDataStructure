@@ -34,51 +34,72 @@ def register():
     print('\t\t-----------------------------------------------------------')
     print('\t\t                        Register                        ')
     print('\t\t-----------------------------------------------------------')
-    user=input('Insert an username: ')
-    password=input('Insert a password: ')
-    if len(user) != 8:
-        print('\nUser length must be 8. Try again')
-        time.sleep(2)
-        os.system('cls')
-        register()
-    else:
-        if len(password) != 8:
-            print('\nPassword length should be 8. Please try again')
+    option=int(input('Choose an option:\n1.-Register user\n2.-Exit to login page\n---> '))
+    if option==1:
+        user=input('Insert an username: ')
+        password=input('Insert a password: ')
+        if len(user) != 8:
+            print('\nUser length must be 8. Try again')
             time.sleep(2)
             os.system('cls')
             register()
         else:
-            if user not in log:
-                hash=generate_password_hash(password)
-                log[user]=hash
-                print(f'The user {user} has been registered')
-                print('\tGoing to login page')
-                time.sleep(2)
-                os.system('cls')
-                mlog_page()
-            if user in log:
-                print(f'The user {user} already exists. Please enter a new one.')
-                print('\n\n!--->Try again')
+            if len(password) != 8:
+                print('\nPassword length should be 8. Please try again')
                 time.sleep(2)
                 os.system('cls')
                 register()
+            else:
+                if user not in log:
+                    hash=generate_password_hash(password)
+                    log[user]=hash
+                    print(f'The user {user} has been registered')
+                    print('\tGoing to login page')
+                    time.sleep(2)
+                    os.system('cls')
+                    register()
+                if user in log:
+                    print(f'The user {user} already exists. Please enter a new one.')
+                    print('\n\n!--->Try again')
+                    time.sleep(2)
+                    os.system('cls')
+                    register()
+    elif option==2:
+        print('Redirectiong to login page...')
+        time.sleep(3)
+        os.system('cls')
+        mlog_page()
 
 def main_page():
     print('----------------------------------------------------------------------------')
     print('                                  Main page')
     print('----------------------------------------------------------------------------')
-    option=int(input('Choose an option:\n1.-Stop program\n2.-Return to first page\n\n----> '))
+    option=int(input('Choose an option:\n1.-Stop program\n2.-Return to first page\n3.-Find user position\n\n----> '))
     if option==1:
         os.system('cls')
         sys.exit()
     elif option==2:
         os.system('cls')
         main()
+    elif option==3:
+        os.system('cls')
+        get_pos_info()
     else:
         print('That option doesnt exist')
         time.sleep(2)
         os.system('cls')
         main_page()
+
+def get_pos_info():
+    keys=[]
+    keys.append(log)
+    #for b in range(len(keys)):
+    
+    #    print(f'Los usuarios son {keys[b]}.')
+    print(keys)
+    time.sleep(8)
+    os.system('cls')
+    main_page()
 
 def main():
     os.system('cls')
